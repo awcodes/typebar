@@ -113,7 +113,7 @@ Options resolve in this order, from highest to lowest priority:
 
 return [
     'keys' => [
-        '*', '_', '#', '[', ']', '(', ')', '`', '>', '-', '|', '~',
+        '*', '_', '#', '!', '[', ']', '(', ')', '`', '>', '-', '|', '~',
     ],
 
     'pairs' => [
