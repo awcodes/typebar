@@ -8,6 +8,9 @@ A mobile-friendly Markdown symbol row for Filament's native `MarkdownEditor`. Ty
 [![GitHub Repo stars](https://img.shields.io/github/stars/awcodes/typebar?style=flat-square&color=blue&label=Stars)](https://github.com/awcodes/typebar/stargazers)
 [![Filament Version](https://img.shields.io/badge/Filament-4.x%2F5.x-d97706.svg?style=flat-square)](https://filamentphp.com/docs/4.x/panels/installation)
 
+> [!WARNING]
+> Typebar is currently a work in progress. Do not use in production yet. Please report any issues you encounter to help us stabilize the package.
+
 ## Requirements
 
 - PHP 8.2+
