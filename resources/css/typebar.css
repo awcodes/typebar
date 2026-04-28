@@ -1,0 +1,38 @@
+.tb-row {
+    position: fixed;
+    right: 0;
+    bottom: env(keyboard-inset-height, 0px);
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    gap: 0.25rem;
+    overflow-x: auto;
+    padding: 0.375rem;
+    padding-bottom: calc(0.375rem + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--gray-200, #e5e7eb);
+    background: var(--gray-50, #f9fafb);
+    -webkit-overflow-scrolling: touch;
+}
+
+.tb-row button {
+    min-width: 2.25rem;
+    height: 2.25rem;
+    flex: 0 0 auto;
+    border: 1px solid var(--gray-300, #d1d5db);
+    border-radius: 0.5rem;
+    background: #ffffff;
+    color: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.tb-row button:active {
+    transform: translateY(1px);
+}
+
+@media (pointer: fine) {
+    .tb-row {
+        display: none;
+    }
+}
