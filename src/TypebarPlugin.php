@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Awcodes\Typebar;
 
 use Filament\Contracts\Plugin;
@@ -12,6 +14,19 @@ class TypebarPlugin implements Plugin
     protected ?array $pairs = null;
 
     protected ?bool $mobileOnly = null;
+
+    public static function make(): static
+    {
+        return app(static::class);
+    }
+
+    public static function get(): static
+    {
+        /** @var static $plugin */
+        $plugin = filament(app(static::class)->getId());
+
+        return $plugin;
+    }
 
     public function getId(): string
     {
@@ -26,19 +41,6 @@ class TypebarPlugin implements Plugin
     public function boot(Panel $panel): void
     {
         //
-    }
-
-    public static function make(): static
-    {
-        return app(static::class);
-    }
-
-    public static function get(): static
-    {
-        /** @var static $plugin */
-        $plugin = filament(app(static::class)->getId());
-
-        return $plugin;
     }
 
     public function keys(array $keys): static
