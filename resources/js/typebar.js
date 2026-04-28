@@ -39,9 +39,11 @@ function isMobile() {
 }
 
 function findInput(wrapper) {
-    return wrapper.querySelector('textarea')
-        || wrapper.querySelector('[contenteditable]')
-        || wrapper.querySelector('[role="textbox"]')
+    return (
+        wrapper.querySelector('textarea') ||
+        wrapper.querySelector('[contenteditable]') ||
+        wrapper.querySelector('[role="textbox"]')
+    )
 }
 
 function render(wrapper, element) {
