@@ -5,3 +5,4 @@ only reveal once the keyboard height is substantial. That way we never show the 
 placed. A fallback timeout covers external keyboards and edge cases.
 2. fullscreen toggling doesn't keep the editor field on screen. when entering fullscreen mode i have to scroll up to the top of the editor to see where the cursor is. and when exiting fullscreen mode the field is no longer at the same scroll position on the page.
 3. would it be better to have the bar be fixed to the bottom of the editor field instead of floating in the page? This would require adjusting the positioning logic to ensure the bar remains visible and accessible regardless of scroll position.
+4. does this work in filament modals/action schema? what does that expierence look like?
