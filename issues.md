@@ -1,8 +1,3 @@
-1. That's Safari's input accessory bar (the ↑↓ navigation + Done row). It sits between our bar and the QWERTY keys, and                     
-   visualViewport.height only accounts for the QWERTY portion — so our keyboardHeight calculation doesn't include it, leaving our bar       
-   underneath. The cleanest fix: start the bar hidden on mobile, let visualViewport resize events update the position during the keyboard animation, and
-only reveal once the keyboard height is substantial. That way we never show the bar in a wrong position — it pops in already correctly  
-placed. A fallback timeout covers external keyboards and edge cases.
-2. fullscreen toggling doesn't keep the editor field on screen. when entering fullscreen mode i have to scroll up to the top of the editor to see where the cursor is. and when exiting fullscreen mode the field is no longer at the same scroll position on the page.
-3. would it be better to have the bar be fixed to the bottom of the editor field instead of floating in the page? This would require adjusting the positioning logic to ensure the bar remains visible and accessible regardless of scroll position.
-4. does this work in filament modals/action schema? what does that expierence look like?
+1. Safari's input accessory bar (the ↑↓ navigation and Done row) is sitting between our bar and the QWERTY keys, and visualViewport.height only accounts for the QWERTY portion — so our keyboardHeight calculation doesn't include it, leaving our bar underneath. The cleanest fix: start the bar hidden on mobile, let visualViewport resize events update the position during the keyboard animation, and only reveal once the keyboard height is significant. That way we never show the bar in a wrong position — it pops in already correctly placed. A fallback timeout covers external keyboards and edge cases.
+2. Fullscreen toggling doesn't keep the editor field on screen. when entering fullscreen mode, I have to scroll up to the top of the editor to see where the cursor is. and when exiting fullscreen mode, the field is no longer at the same scroll position on the page. also, is there a way to lock the body when in fullscreen so it doesn't scroll behind the editor?
+3. In dark mode the editor field has a transparent background, can you fix that?

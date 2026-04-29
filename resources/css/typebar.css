@@ -101,3 +101,12 @@ body.tb-fullscreen-active {
 .dark .EasyMDEContainer.tb-fullscreen {
     background: var(--gray-900);
 }
+
+.dark .EasyMDEContainer.tb-fullscreen .CodeMirror {
+    background: var(--gray-900);
+    color: var(--gray-100);
+}
+
+.dark .EasyMDEContainer.tb-fullscreen .CodeMirror-cursor {
+    border-left-color: var(--gray-100);
+}

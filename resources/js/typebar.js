@@ -2,6 +2,8 @@ let row = null
 let input = null
 let currentWrapper = null
 let pressing = false
+let rowVisible = false
+let savedScrollY = 0
 
 document.addEventListener('focusin', (event) => {
     const wrapper = event.target.closest('[data-typebar]')
@@ -62,6 +64,16 @@ function positionRow() {
     const vv = window.visualViewport
     const keyboardHeight = window.innerHeight - vv.height - vv.offsetTop
     row.style.bottom = Math.max(0, keyboardHeight) + 'px'
+
+    // On mobile, keep the row hidden until the keyboard height is significant so
+    // we never flash it in the wrong position. Safari's input accessory bar sits
+    // above the QWERTY keys and isn't included in visualViewport.height until the
+    // keyboard animation completes, so we wait for a meaningful height before
+    // revealing (the fallback timeout in render() handles external keyboards).
+    if (!rowVisible && keyboardHeight > 100) {
+        row.style.visibility = 'visible'
+        rowVisible = true
+    }
 }
 
 function render(wrapper, element) {
@@ -94,10 +106,25 @@ function render(wrapper, element) {
         fsButton.setAttribute('aria-label', isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen')
 
         bindButton(fsButton, container, () => {
+            const wasFullscreen = easyMDEContainer.classList.contains('tb-fullscreen')
+
+            if (!wasFullscreen) {
+                savedScrollY = window.scrollY
+            }
+
             const active = easyMDEContainer.classList.toggle('tb-fullscreen')
             document.body.classList.toggle('tb-fullscreen-active', active)
             fsButton.classList.toggle('tb-fs-active', active)
             fsButton.setAttribute('aria-label', active ? 'Exit fullscreen' : 'Enter fullscreen')
+
+            if (active) {
+                requestAnimationFrame(() => {
+                    const cm = easyMDEContainer.querySelector('.CodeMirror')?.CodeMirror
+                    if (cm) cm.scrollIntoView(cm.getCursor())
+                })
+            } else {
+                requestAnimationFrame(() => window.scrollTo(0, savedScrollY))
+            }
         })
 
         container.appendChild(fsButton)
@@ -125,6 +152,20 @@ function render(wrapper, element) {
     row = container
     input = element
     currentWrapper = wrapper
+
+    // On mobile, start hidden and reveal via positionRow once the keyboard height
+    // is significant. The fallback timeout covers external keyboards and edge cases
+    // where the keyboard never triggers a meaningful visualViewport resize.
+    if (isMobile()) {
+        rowVisible = false
+        container.style.visibility = 'hidden'
+        setTimeout(() => {
+            if (row === container && !rowVisible) {
+                row.style.visibility = 'visible'
+                rowVisible = true
+            }
+        }, 600)
+    }
 
     if (window.visualViewport) {
         window.visualViewport.addEventListener('resize', positionRow)
@@ -261,6 +302,7 @@ function destroy() {
     row = null
     input = null
     currentWrapper = null
+    rowVisible = false
 }
 
 function parse(value, fallback) {
