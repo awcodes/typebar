@@ -15,6 +15,8 @@ class TypebarPlugin implements Plugin
 
     protected ?bool $mobileOnly = null;
 
+    protected ?bool $collapsible = null;
+
     public static function make(): static
     {
         return app(static::class);
@@ -64,6 +66,13 @@ class TypebarPlugin implements Plugin
         return $this;
     }
 
+    public function collapsible(bool $condition = true): static
+    {
+        $this->collapsible = $condition;
+
+        return $this;
+    }
+
     public function getKeys(): array
     {
         return $this->keys ?? config('typebar.keys', []);
@@ -77,5 +86,10 @@ class TypebarPlugin implements Plugin
     public function isMobileOnly(): bool
     {
         return $this->mobileOnly ?? config('typebar.mobile_only', true);
+    }
+
+    public function isCollapsible(): bool
+    {
+        return $this->collapsible ?? config('typebar.collapsible', false);
     }
 }

@@ -82,3 +82,40 @@ test('typebar and typebarPairs can be chained without throwing', function () {
     expect($editor)->toBeInstanceOf(MarkdownEditor::class)
         ->and($editor->getExtraAttributes())->toHaveKey('data-typebar');
 });
+
+test('typebar sets data-typebar-collapsible to false by default', function () {
+    $attrs = MarkdownEditor::make('content')->typebar()->getExtraAttributes();
+
+    expect($attrs)->toHaveKey('data-typebar-collapsible')
+        ->and($attrs['data-typebar-collapsible'])->toBe('false');
+});
+
+test('typebar sets data-typebar-collapsible to true when config is true', function () {
+    config(['typebar.collapsible' => true]);
+
+    $attrs = MarkdownEditor::make('content')->typebar()->getExtraAttributes();
+
+    expect($attrs['data-typebar-collapsible'])->toBe('true');
+});
+
+test('typebarCollapsible macro is registered on MarkdownEditor', function () {
+    expect(MarkdownEditor::hasMacro('typebarCollapsible'))->toBeTrue();
+});
+
+test('typebarCollapsible returns a MarkdownEditor instance', function () {
+    $editor = MarkdownEditor::make('content')->typebar()->typebarCollapsible();
+
+    expect($editor)->toBeInstanceOf(MarkdownEditor::class);
+});
+
+test('typebarCollapsible sets data-typebar-collapsible to true', function () {
+    $attrs = MarkdownEditor::make('content')->typebarCollapsible()->getExtraAttributes();
+
+    expect($attrs['data-typebar-collapsible'])->toBe('true');
+});
+
+test('typebarCollapsible can be set to false explicitly', function () {
+    $attrs = MarkdownEditor::make('content')->typebar()->typebarCollapsible(false)->getExtraAttributes();
+
+    expect($attrs['data-typebar-collapsible'])->toBe('false');
+});

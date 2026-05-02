@@ -75,3 +75,31 @@ test('isMobileOnly returns true when set to true', function () {
 test('mobileOnly defaults to true', function () {
     expect(app(TypebarPlugin::class)->mobileOnly()->isMobileOnly())->toBeTrue();
 });
+
+test('collapsible is fluent', function () {
+    $plugin = app(TypebarPlugin::class);
+
+    expect($plugin->collapsible(true))->toBe($plugin);
+});
+
+test('isCollapsible falls back to config when not set', function () {
+    $plugin = app(TypebarPlugin::class);
+
+    expect($plugin->isCollapsible())->toBe(config('typebar.collapsible'));
+});
+
+test('isCollapsible returns true when set to true', function () {
+    $plugin = app(TypebarPlugin::class)->collapsible(true);
+
+    expect($plugin->isCollapsible())->toBeTrue();
+});
+
+test('isCollapsible returns false when set to false', function () {
+    $plugin = app(TypebarPlugin::class)->collapsible(false);
+
+    expect($plugin->isCollapsible())->toBeFalse();
+});
+
+test('collapsible defaults to false', function () {
+    expect(app(TypebarPlugin::class)->collapsible()->isCollapsible())->toBeTrue();
+});

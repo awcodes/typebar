@@ -43,6 +43,14 @@
     background: var(--gray-100);
 }
 
+.tb-toggle-btn {
+    color: var(--gray-500);
+}
+
+.tb-row.tb-collapsed > *:not(.tb-toggle-btn) {
+    display: none;
+}
+
 .dark .tb-row {
     border-top-color: var(--gray-700);
     background: var(--gray-900);
@@ -59,6 +67,17 @@
 
 .dark .tb-fs-btn.tb-fs-active {
     background: var(--gray-700);
+}
+
+.dark .tb-toggle-btn {
+    color: var(--gray-400);
+}
+
+/* Prevent iOS/Android zoom on focus — browsers zoom when font-size < 16px */
+@media (pointer: coarse) {
+    .EasyMDEContainer .CodeMirror textarea {
+        font-size: max(16px, 1em);
+    }
 }
 
 @media (pointer: fine) {

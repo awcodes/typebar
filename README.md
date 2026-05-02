@@ -34,7 +34,7 @@ php artisan vendor:publish --tag="typebar-config"
 
 ### Basic
 
-Add `.typebar()` to any `MarkdownEditor` field to enable the symbol row:
+Add `->typebar()` to any `MarkdownEditor` field to enable the symbol row:
 
 ```php
 use Filament\Forms\Components\MarkdownEditor;
@@ -54,7 +54,7 @@ MarkdownEditor::make('content')
 
 ### Pairs
 
-Use `typebarPairs()` to define character pairs. When a paired key is tapped, both characters are inserted and the cursor is placed between them:
+Use `->typebarPairs()` to define character pairs. When a paired key is tapped, both characters are inserted and the cursor is placed between them:
 
 ```php
 MarkdownEditor::make('content')
@@ -65,6 +65,27 @@ MarkdownEditor::make('content')
         '`' => '`',
     ])
 ```
+
+### Collapsible
+
+Use `->typebarCollapsible()` to let users collapse the symbol row down to a single toggle button. The collapsed/expanded state is saved to `localStorage` so it persists across page loads:
+
+```php
+MarkdownEditor::make('content')
+    ->typebar()
+    ->typebarCollapsible()
+```
+
+Pass `false` to explicitly disable collapsing on a field when it is enabled at the plugin or config level:
+
+```php
+MarkdownEditor::make('content')
+    ->typebar()
+    ->typebarCollapsible(false)
+```
+
+> [!NOTE]
+> `->typebarCollapsible()` must be called before `->typebar()` when chaining both on the same field, because Filament resolves the first-registered attribute value. Alternatively, enable collapsible at the plugin or config level and it will apply automatically whenever `->typebar()` is called.
 
 ## Panel Plugin
 
@@ -86,6 +107,7 @@ public function panel(Panel $panel): Panel
                     '`' => '`',
                 ])
                 ->mobileOnly()
+                ->collapsible()
         );
 }
 ```
@@ -101,12 +123,21 @@ TypebarPlugin::make()
     ->mobileOnly(false)
 ```
 
+### `collapsible()`
+
+Allow users to collapse the symbol row to a single toggle button. The preference is saved in `localStorage`:
+
+```php
+TypebarPlugin::make()
+    ->collapsible()
+```
+
 ## Configuration Priority
 
 Options resolve in this order, from highest to lowest priority:
 
-1. Field-level methods (`->typebar([...])`, `->typebarPairs([...])`)
-2. Plugin fluent options (`TypebarPlugin::make()->keys([...])->pairs([...])`)
+1. Field-level methods (`->typebar([...])`, `->typebarPairs([...])`, `->typebarCollapsible()`)
+2. Plugin fluent options (`TypebarPlugin::make()->keys([...])->pairs([...])->collapsible()`)
 3. Published config values (`config/typebar.php`)
 
 ## Configuration
@@ -116,7 +147,8 @@ Options resolve in this order, from highest to lowest priority:
 
 return [
     'keys' => [
-        '*', '_', '#', '!', '[', ']', '(', ')', '{', '}', ':', '`', '>', '-', '|', '~',
+        '#', '*', '_', '!', '`', '[', ']', '(', ')', '{', '}',
+        '<', '>', '-', '|', '~', '@', '$', ':', '=', '/', '"', "'",
     ],
 
     'pairs' => [
@@ -126,6 +158,8 @@ return [
     ],
 
     'mobile_only' => true,
+
+    'collapsible' => false,
 ];
 ```
 

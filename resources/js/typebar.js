@@ -81,6 +81,7 @@ function render(wrapper, element) {
 
     const keys = parse(wrapper.dataset.typebarKeys, [])
     const pairs = parse(wrapper.dataset.typebarPairs, {})
+    const collapsible = wrapper.dataset.typebarCollapsible === 'true'
 
     if (!keys.length) {
         return
@@ -93,6 +94,36 @@ function render(wrapper, element) {
 
     if (wrapper.dataset.typebarMobile === 'true') {
         container.dataset.mobileOnly = ''
+    }
+
+    if (collapsible) {
+        const isCollapsed = localStorage.getItem('typebar:collapsed') === 'true'
+
+        if (isCollapsed) {
+            container.classList.add('tb-collapsed')
+        }
+
+        const toggleBtn = document.createElement('button')
+        toggleBtn.type = 'button'
+        toggleBtn.className = 'tb-toggle-btn'
+        toggleBtn.textContent = '⌘'
+        toggleBtn.setAttribute('aria-label', 'Toggle typebar')
+        toggleBtn.setAttribute('aria-expanded', String(!isCollapsed))
+
+        bindButton(toggleBtn, container, () => {
+            const nowCollapsed = !container.classList.contains('tb-collapsed')
+            container.classList.toggle('tb-collapsed', nowCollapsed)
+            toggleBtn.setAttribute('aria-expanded', String(!nowCollapsed))
+            localStorage.setItem('typebar:collapsed', String(nowCollapsed))
+        })
+
+        container.appendChild(toggleBtn)
+
+        const sep = document.createElement('span')
+        sep.className = 'tb-sep'
+        sep.setAttribute('role', 'separator')
+        sep.setAttribute('aria-orientation', 'vertical')
+        container.appendChild(sep)
     }
 
     const easyMDEContainer = wrapper.querySelector('.EasyMDEContainer')
