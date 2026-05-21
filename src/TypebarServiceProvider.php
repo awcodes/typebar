@@ -33,8 +33,8 @@ class TypebarServiceProvider extends PackageServiceProvider
     public function packageBooted(): void
     {
         FilamentAsset::register([
-            Js::make('typebar', __DIR__ . '/../resources/dist/typebar.js'),
-            Css::make('typebar', __DIR__ . '/../resources/css/typebar.css'),
+            Js::make('typebar', __DIR__ . '/../resources/dist/typebar.js')->loadedOnRequest(),
+            Css::make('typebar', __DIR__ . '/../resources/css/typebar.css')->loadedOnRequest(),
         ], package: 'awcodes/typebar');
 
         MarkdownEditor::mixin(new MarkdownEditorMixin());
