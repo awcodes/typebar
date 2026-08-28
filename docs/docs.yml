@@ -1,0 +1,9 @@
+version: 1
+
+title: Typebar
+
+navigation:
+  - index
+  - installation
+  - usage
+  - configuration
