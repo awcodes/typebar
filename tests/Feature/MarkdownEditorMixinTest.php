@@ -83,6 +83,25 @@ test('typebar and typebarPairs can be chained without throwing', function () {
         ->and($editor->getExtraAttributes())->toHaveKey('data-typebar');
 });
 
+test('typebarPairs resolves the same whichever side of typebar it is chained on', function () {
+    $pairs = ['(' => ')'];
+    $expected = e(json_encode($pairs));
+
+    $after = MarkdownEditor::make('content')->typebar()->typebarPairs($pairs);
+    $before = MarkdownEditor::make('content')->typebarPairs($pairs)->typebar();
+
+    expect((string) $after->getExtraAttributes()['data-typebar-pairs'])->toBe($expected)
+        ->and((string) $before->getExtraAttributes()['data-typebar-pairs'])->toBe($expected);
+});
+
+test('typebarCollapsible resolves the same whichever side of typebar it is chained on', function () {
+    $after = MarkdownEditor::make('content')->typebar()->typebarCollapsible();
+    $before = MarkdownEditor::make('content')->typebarCollapsible()->typebar();
+
+    expect($after->getExtraAttributes()['data-typebar-collapsible'])->toBe('true')
+        ->and($before->getExtraAttributes()['data-typebar-collapsible'])->toBe('true');
+});
+
 test('typebar sets data-typebar-collapsible to false by default', function () {
     $attrs = MarkdownEditor::make('content')->typebar()->getExtraAttributes();
 

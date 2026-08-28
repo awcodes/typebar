@@ -85,7 +85,7 @@ MarkdownEditor::make('content')
 ```
 
 > [!NOTE]
-> `->typebarCollapsible()` must be called before `->typebar()` when chaining both on the same field, because Filament resolves the first-registered attribute value. Alternatively, enable collapsible at the plugin or config level and it will apply automatically whenever `->typebar()` is called.
+> `->typebarCollapsible()` and `->typebarPairs()` can be chained on either side of `->typebar()` — both orders resolve to the same result. Alternatively, enable collapsible at the plugin or config level and it will apply automatically whenever `->typebar()` is called.
 
 ## Panel Plugin
 
