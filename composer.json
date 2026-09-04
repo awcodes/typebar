@@ -61,8 +61,7 @@
     "scripts": {
         "post-autoload-dump": [
             "@clear",
-            "@prepare",
-            "@php ./vendor/bin/testbench package:discover --ansi"
+            "@prepare"
         ],
         "lint": "pint",
         "refactor": "rector",

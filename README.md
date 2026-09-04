@@ -169,6 +169,17 @@ return [
 composer test
 ```
 
+## Development
+
+Install dependencies and start the Workbench application:
+
+```bash
+composer install
+composer serve
+```
+
+Open `/admin` and sign in with `test@example.com` / `password`. The seeded post's edit form exercises Typebar through a real Filament `MarkdownEditor`.
+
 ## Contributing
 
 Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
