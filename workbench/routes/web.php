@@ -4,6 +4,4 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return redirect('/admin');
-});
+Route::get('/', fn (): Illuminate\Http\RedirectResponse => redirect('/admin'));
