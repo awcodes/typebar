@@ -1,12 +1,10 @@
 name: CI
 
-# TEMPORARY — verification harness for awcodes/.github#4.
+# Verification harness for awcodes/.github#4 (merged; v1.4.0 cut, v1 moved to 46a5ef9).
 #
-# This caller is pinned to the PR branch, not @v1, so the new `All Checks` gate job can
-# be exercised end to end before v1.4.0 is cut. Before this PR is mergeable:
-#   1. repoint `uses:` to @v1 (after v1.4.0 lands and v1 is moved), and
-#   2. delete lint.yml / phpstan.yml / tests.yml, which this replaces.
-# Until then it runs alongside the old workflows rather than instead of them.
+# Now pinned to @v1, so this run also confirms consumers resolve the moved tag.
+# Still not the Wave 2 migration: lint.yml / phpstan.yml / tests.yml are still here.
+# Deleting them is what turns this into the real thing.
 
 on:
   push:
@@ -50,7 +48,7 @@ on:
 
 jobs:
   ci:
-    uses: awcodes/.github/.github/workflows/filament-plugin.yml@chore/ci-gate-and-auto-merge-template
+    uses: awcodes/.github/.github/workflows/filament-plugin.yml@v1
     with:
       matrix: |
         [
