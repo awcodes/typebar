@@ -1,0 +1,71 @@
+name: CI
+
+# TEMPORARY — verification harness for awcodes/.github#4.
+#
+# This caller is pinned to the PR branch, not @v1, so the new `All Checks` gate job can
+# be exercised end to end before v1.4.0 is cut. Before this PR is mergeable:
+#   1. repoint `uses:` to @v1 (after v1.4.0 lands and v1 is moved), and
+#   2. delete lint.yml / phpstan.yml / tests.yml, which this replaces.
+# Until then it runs alongside the old workflows rather than instead of them.
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/**"
+      - "config/**"
+      - "database/**"
+      - "resources/**"
+      - "routes/**"
+      - "tests/**"
+      - "composer.json"
+      - "composer.lock"
+      - "package.json"
+      - "package-lock.json"
+      - "phpunit.xml*"
+      - "phpstan.neon*"
+      - "rector.php"
+      - "pint.json"
+      - ".github/workflows/**"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "src/**"
+      - "config/**"
+      - "database/**"
+      - "resources/**"
+      - "routes/**"
+      - "tests/**"
+      - "composer.json"
+      - "composer.lock"
+      - "package.json"
+      - "package-lock.json"
+      - "phpunit.xml*"
+      - "phpstan.neon*"
+      - "rector.php"
+      - "pint.json"
+      - ".github/workflows/**"
+
+jobs:
+  ci:
+    uses: awcodes/.github/.github/workflows/filament-plugin.yml@chore/ci-gate-and-auto-merge-template
+    with:
+      matrix: |
+        [
+          {"php":"8.5","laravel":"13.*","filament":"5.*","testbench":"11.*","dependencies":"prefer-stable"},
+          {"php":"8.4","laravel":"13.*","filament":"5.*","testbench":"11.*","dependencies":"prefer-stable"},
+          {"php":"8.5","laravel":"12.*","filament":"5.*","testbench":"10.*","dependencies":"prefer-stable"},
+          {"php":"8.4","laravel":"12.*","filament":"5.*","testbench":"10.*","dependencies":"prefer-stable"},
+          {"php":"8.3","laravel":"12.*","filament":"5.*","testbench":"10.*","dependencies":"prefer-stable"},
+          {"php":"8.4","laravel":"12.*","filament":"4.*","testbench":"10.*","dependencies":"prefer-stable"},
+          {"php":"8.3","laravel":"12.*","filament":"4.*","testbench":"10.*","dependencies":"prefer-stable"}
+        ]
+      run-tests: true
+      run-lint: true
+      # typebar has a committed phpstan-baseline.neon, larastan is loaded and level is 5.
+      run-static-analysis: true
+      run-reformat: true
+      # typebar compiles resources/dist/typebar.js via `npm run build`.
+      run-build: true
