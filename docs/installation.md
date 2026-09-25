@@ -5,6 +5,16 @@ description: Install Typebar and publish its config file.
 
 # Installation
 
+## Compatibility
+
+| Filament version | Package version |
+|------------------|-----------------|
+| 4.x & 5.x        | 0.x             |
+
+Typebar requires PHP 8.2 or later and `filament/filament`.
+
+## Install the package
+
 Install the package via Composer:
 
 ```bash

@@ -12,11 +12,6 @@ It exists because the characters Markdown leans on — `#`, `*`, `_`, backticks,
 > [!WARNING]
 > Typebar is a work in progress and is not ready for production use. Please report any issues you hit.
 
-## Requirements
-
-- PHP 8.2 or later
-- Filament v4 or v5
-
 ## How it is configured
 
 Every option can be set in three places, and they resolve from most to least specific:
