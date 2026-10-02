@@ -66,4 +66,4 @@ MarkdownEditor::make('content')
     ->typebarCollapsible(false);
 ```
 
-Both modifiers refine what `->typebar()` set up, so reading them in that order matches what they do.
+Both modifiers refine what `->typebar()` set up, so reading them in that order matches what they do. The order is not required, though: chained before or after `->typebar()`, the field's own pairs and collapsible setting win either way.
