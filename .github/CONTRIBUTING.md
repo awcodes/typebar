@@ -33,6 +33,23 @@ Before submitting a pull request:
 - Check the codebase to ensure that your feature doesn't already exist.
 - Check the pull requests to ensure that another person hasn't already submitted the feature or fix.
 
+## Development
+
+Install dependencies and start the Workbench application:
+
+```bash
+composer install
+composer serve
+```
+
+Open `/admin` and sign in with `test@example.com` / `password`. The seeded post's edit form exercises Typebar through a real Filament `MarkdownEditor`.
+
+## Testing
+
+```bash
+composer test
+```
+
 ## Requirements
 
 If the project maintainer has any additional requirements, you will find them listed here.
