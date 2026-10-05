@@ -19,6 +19,7 @@ class PostForm
                     ->typebar(['#', '*', '_', '[', ']', '(', ')', '`'])
                     ->typebarPairs(['(' => ')', '[' => ']', '`' => '`'])
                     ->typebarCollapsible()
+                    ->extraAttributes(['data-focus' => 'content-editor'], merge: true)
                     ->columnSpanFull(),
             ]);
     }

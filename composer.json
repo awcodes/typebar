@@ -1,6 +1,6 @@
 {
     "name": "awcodes/typebar",
-    "description": "Mobile Markdown symbol row for the Filament Markdown editor.",
+    "description": "A mobile-friendly Markdown symbol row for Filament's MarkdownEditor field.",
     "type": "library",
     "keywords": [
         "awcodes",
@@ -47,6 +47,7 @@
         "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {
+        "awcodes/focus": "^1.0",
         "larastan/larastan": "^3.0",
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^8.0",
@@ -82,6 +83,10 @@
             "Composer\\Config::disableProcessTimeout",
             "@build",
             "@php vendor/bin/testbench serve --ansi"
+        ],
+        "focus": [
+            "Composer\\Config::disableProcessTimeout",
+            "focus"
         ]
     },
     "config": {
