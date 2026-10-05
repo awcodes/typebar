@@ -18,6 +18,9 @@ MarkdownEditor::make('content')
 
 With no argument the field uses the key set from the panel plugin, falling back to the config. See [Configuration](configuration.md).
 
+![A Markdown editor on a phone-width screen with the Typebar row pinned to the bottom: a collapse toggle, a fullscreen toggle, and keys for #, *, _, brackets, parentheses, and a backtick, scrolling off to the right](assets/mobile-light.png#gh-light-mode-only)
+![A Markdown editor on a phone-width screen with the Typebar row pinned to the bottom: a collapse toggle, a fullscreen toggle, and keys for #, *, _, brackets, parentheses, and a backtick, scrolling off to the right](assets/mobile-dark.png#gh-dark-mode-only)
+
 > [!NOTE]
 > By default the row only appears on coarse-pointer (touch) devices, so you will not see it on a desktop browser unless you turn that off with `mobileOnly(false)` on the plugin or `mobile_only` in the config.
 
@@ -57,6 +60,9 @@ MarkdownEditor::make('content')
     ->typebar()
     ->typebarCollapsible();
 ```
+
+![The same phone-width editor with the Typebar row collapsed to its single toggle button](assets/collapsed-light.png#gh-light-mode-only)
+![The same phone-width editor with the Typebar row collapsed to its single toggle button](assets/collapsed-dark.png#gh-dark-mode-only)
 
 Pass `false` to turn collapsing off for one field when it is enabled at the plugin or config level:
 

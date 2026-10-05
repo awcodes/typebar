@@ -50,6 +50,9 @@ TypebarPlugin::make()
     ->mobileOnly(false);
 ```
 
+![A Filament edit page at desktop width with the Markdown editor focused and the Typebar row running along the bottom of the window](assets/desktop-light.png#gh-light-mode-only)
+![A Filament edit page at desktop width with the Markdown editor focused and the Typebar row running along the bottom of the window](assets/desktop-dark.png#gh-dark-mode-only)
+
 ## Config file
 
 ```php
