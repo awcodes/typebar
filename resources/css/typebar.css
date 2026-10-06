@@ -20,7 +20,7 @@
     flex: 0 0 auto;
     border: 1px solid var(--gray-300);
     border-radius: 0.5rem;
-    background: var(--white);
+    background: #fff;
     color: inherit;
     font-size: 1rem;
     font-weight: 600;
@@ -96,7 +96,7 @@
     height: 100dvh !important;
     max-height: none !important;
     min-height: 0 !important;
-    background: var(--white);
+    background: #fff;
 }
 
 .EasyMDEContainer.tb-fullscreen .CodeMirror {

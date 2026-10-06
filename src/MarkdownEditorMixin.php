@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Awcodes\Typebar;
 
 use Closure;
+use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Support\HtmlString;
+use Illuminate\Support\Js;
 
 /**
  * @mixin \Filament\Forms\Components\MarkdownEditor
@@ -23,6 +25,9 @@ class MarkdownEditorMixin
             $collapsible = $plugin?->isCollapsible() ?? config('typebar.collapsible', false);
 
             return $this->extraAttributes([
+                // The assets are registered with loadedOnRequest(), so the editor requests them itself.
+                'x-load-css' => new HtmlString(e('[' . Js::from(FilamentAsset::getStyleHref('typebar', 'awcodes/typebar')) . ']')),
+                'x-load-js' => new HtmlString(e('[' . Js::from(FilamentAsset::getScriptSrc('typebar', 'awcodes/typebar')) . ']')),
                 'data-typebar' => 'true',
                 'data-typebar-keys' => new HtmlString(e(json_encode($keys))),
                 'data-typebar-pairs' => new HtmlString(e(json_encode($pairs))),

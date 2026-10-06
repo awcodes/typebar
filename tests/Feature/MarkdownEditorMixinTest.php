@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Filament\Forms\Components\MarkdownEditor;
+use Filament\Support\Facades\FilamentAsset;
 
 test('typebar macro is registered on MarkdownEditor', function () {
     expect(MarkdownEditor::hasMacro('typebar'))->toBeTrue();
@@ -137,4 +138,24 @@ test('typebarCollapsible can be set to false explicitly', function () {
     $attrs = MarkdownEditor::make('content')->typebar()->typebarCollapsible(false)->getExtraAttributes();
 
     expect($attrs['data-typebar-collapsible'])->toBe('false');
+});
+
+test('typebar requests its assets, which are registered to load on request', function () {
+    $attrs = MarkdownEditor::make('content')->typebar()->getExtraAttributes();
+
+    // The attribute holds a JavaScript array, escaped for HTML, with its slashes escaped by Js::from().
+    $decode = fn (mixed $value): string => str_replace('\\/', '/', html_entity_decode((string) $value, ENT_QUOTES));
+
+    expect($decode($attrs['x-load-css']))->toContain(FilamentAsset::getStyleHref('typebar', 'awcodes/typebar'))
+        ->and($decode($attrs['x-load-js']))->toContain(FilamentAsset::getScriptSrc('typebar', 'awcodes/typebar'));
+});
+
+test('typebarPairs and typebarCollapsible keep the asset requests', function () {
+    $attrs = MarkdownEditor::make('content')
+        ->typebar()
+        ->typebarPairs(['(' => ')'])
+        ->typebarCollapsible()
+        ->getExtraAttributes();
+
+    expect($attrs)->toHaveKeys(['x-load-css', 'x-load-js']);
 });
